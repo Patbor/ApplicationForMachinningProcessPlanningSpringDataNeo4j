@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Save Part</title>
+</head>
+<body>
+
+<div class ="container">
+    <h3>Process Directory</h3>
+    <hr>
+    <p class="h4 mb4">Save Process</p>
+    <form action="#" th:action="@{/process/save}"
+          th:object="${process}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <label th:text="IDPRJ"></label>
+        <input type="text" th:field="*{idprj}"
+               class="form-control mb-2 col-2" placeholder="IDPRJ">
+        <label th:text="developedBy"></label>
+        <input type="text" th:field="*{developedBy}"
+               class="form-control mb-2 col-2" placeholder="developedBy ">
+        <label th:text="checkedBy"></label>
+        <input type="text" th:field="*{checkedBy}"
+               class="form-control mb-2 col-2" placeholder="checkedBy">
+        <label th:text="approvedBy"></label>
+        <input type="text" th:field="*{approvedBy}"
+               class="form-control mb-2 col-2" placeholder="approvedBy">
+        <button type="submit" class="btn btn-info col-2">Save</button>
+    </form>
+    <hr>
+
+</div>
+</body>
+</html>

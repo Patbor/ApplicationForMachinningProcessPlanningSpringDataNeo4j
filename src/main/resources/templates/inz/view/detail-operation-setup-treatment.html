@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Treatment</title>
+</head>
+<body>
+<div class="container">
+    <h3>Treatment</h3>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <th>IDMC</th>
+        <th>IDSET</th>
+        <th>MCNo</th>
+        <th>PathNo</th>
+        <th>TypeDT</th>
+        <th>Description</th>
+        <th>ToolID</th>
+        <th>IDPFt</th>
+        <th>Dp</th>
+        <th>Dk</th>
+        <th>L</th>
+        <th>ap</th>
+        <th>F</th>
+        <th>Vc</th>
+        <th>n</th>
+        <th>tg</th>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${treatment.getIdmc()}"/>
+            <td th:text="${treatment.getIdset()}"/>
+            <td th:text="${treatment.getMcno()}"/>
+            <td th:text="${treatment.getPathNo()}"/>
+            <td th:text="${treatment.getTypeDT()}"/>
+            <td th:text="${treatment.getDescription()}"/>
+            <td th:text="${treatment.getToolID()}"/>
+            <td th:text="${treatment.getIdpft()}"/>
+            <td th:text="${treatment.getDp()}"/>
+            <td th:text="${treatment.getDk()}"/>
+            <td th:text="${treatment.getL()}"/>
+            <td th:text="${treatment.getAp()}"/>
+            <td th:text="${treatment.getF()}"/>
+            <td th:text="${treatment.getVc()}"/>
+            <td th:text="${treatment.getN()}"/>
+            <td th:text="${treatment.getTg()}"/>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<hr>
+<div class="container">
+    <h3>Tool</h3>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <th>IDCT</th>
+        <th>CTCode</th>
+        <th>CTName</th>
+        <th>Description</th>
+
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${tool.getIdct()}"/>
+            <td th:text="${tool.getcTCode()}"/>
+            <td th:text="${tool.getcTName()}"/>
+            <td th:text="${tool.getDescription()}"/>
+
+        </tr>
+        </tbody>
+    </table>
+    <hr>
+</div>
+<div class="container">
+    <h3>Feature</h3>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>IDFtr</th>
+            <th>IDPart</th>
+            <th>FtrNo</th>
+            <th>Ftrtype</th>
+            <th>Diameter</th>
+            <th>Length</th>
+            <th>Depth</th>
+            <th>Width</th>
+            <th>Radius</th>
+            <th>Angle</th>
+            <th>Fit</th>
+            <th>IT</th>
+            <th>Ra</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${feature.getIdftr()}"/>
+            <td th:text="${feature.getIdPart()}"/>
+            <td th:text="${feature.getFtrno()}"/>
+            <td th:text="${feature.getFtrtype()}"/>
+            <td th:text="${feature.getDiameter}"/>
+            <td th:text="${feature.getLength()}"/>
+            <td th:text="${feature.getDepth()}"/>
+            <td th:text="${feature.getWidth()}"/>
+            <td th:text="${feature.getRadius()}"/>
+            <td th:text="${feature.getAngle()}"/>
+            <td th:text="${feature.getFit()}"/>
+            <td th:text="${feature.getIt()}"/>
+            <td th:text="${feature.getRa()}"/>
+
+        </tbody>
+    </table>
+    <hr>
+</div>
+<div class="container">
+    <h3>ADTR</h3>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>IDADTR</th>
+            <th>ADT1</th>
+            <th>ADT2</th>
+            <th>ADT3</th>
+            <th>ADT4</th>
+            <th>ADT5</th>
+            <th>ADTRDescription</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${adtr.getIdadtr()}"/>
+            <td th:text="${adtr.getAdt1()}"/>
+            <td th:text="${adtr.getAdt2()}"/>
+            <td th:text="${adtr.getAdt3()}"/>
+            <td th:text="${adtr.getAdt4()}"/>
+            <td th:text="${adtr.getAdt5()}"/>
+            <td th:text="${adtr.getAdtrDes()}"/>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Detail</title>
+</head>
+<body>
+<div class="container">
+    <h3>Operation</h3>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>IDOP</th>
+            <th>IDPRJ</th>
+            <th>OPNo</th>
+            <th>OPType</th>
+            <th>Department</th>
+            <th>Workstation</th>
+            <th>Description</th>
+            <th>Tpz</th>
+            <th>Tj</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${operation.getIdop()}"/>
+            <td th:text="${operation.getIdprj()}"/>
+            <td th:text="${operation.getOpno()}"/>
+            <td th:text="${operation.getOpType()}"/>
+            <td th:text="${operation.getDepartment()}"/>
+            <td th:text="${operation.getWorkstation()}"/>
+            <td th:text="${operation.getDescription()}"/>
+            <td th:text="${operation.getTpz()}"/>
+            <td th:text="${operation.getTj()}"/>
+        </tr>
+        </tbody>
+    </table>
+    <hr>
+</div>
+<div class="container">
+    <h3>With Setups</h3>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>IDSET</th>
+            <th>IDOP</th>
+            <th>SETNo</th>
+            <th>SETType</th>
+            <th>Description</th>
+            <th>Action</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tempSetup : ${setups}">
+            <td th:text="${tempSetup.getIdset()}"/>
+            <td th:text="${tempSetup.getIdop()}"/>
+            <td th:text="${tempSetup.getSetNo()}"/>
+            <td th:text="${tempSetup.getSetType()}"/>
+            <td th:text="${tempSetup.getDescription()}"/>
+            <td>
+                <a th:href="@{/setup/updateForm(setupId =${tempSetup.getId()})}"
+                   class="btn btn-info btn-sm">
+                    Update
+                </a>
+                <a th:href="@{/setup/delete(setupId =${tempSetup.getId()})}"
+                   class="btn btn-danger btn-sm"
+                   onclick="if(!(confirm('Are you sure you want to delete this setup?'))) return false">
+                    Delete
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/setup/formSetup}"
+       class="btn btn-primary btn-sm mb-3">
+        Add setup
+    </a>
+
+    <form action="#" th:action="@{/view/detail/operation/setup}"
+          th:object="${id}" method="get">
+        <select class="form-control mb-2 col-2" th:field="*{id}">
+            <option th:each="setup : ${setups}"
+                    th:value="${setup.getIdset()}"
+                    th:text="${setup.getIdset()}"/>
+        </select>
+        <button type="submit">Setup detail</button>
+    </form>
+    <hr>
+</div>
+<div class="container">
+    <h3>Using Machine</h3>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>PKIDMT</th>
+            <th>Method</th>
+            <th>SubType</th>
+            <th>Producer</th>
+            <th>Depart</th>
+            <th>MTDescription</th>
+            <th>Length</th>
+            <th>Width</th>
+            <th>Height</th>
+            <th>Mass</th>
+            <th>Power</th>
+            <th>n_min</th>
+            <th>n_max</th>
+            <th>ToolSocket</th>
+            <th>WorkSocket</th>
+            <th>Cz</th>
+            <th>Kw</th>
+            <th>Kp</th>
+        </tr>
+        </thead>
+        <tbody>
+        <td th:text="${machine.getPkidmt()}"/>
+        <td th:text="${machine.getMethod()}"/>
+        <td th:text="${machine.getSubType()}"/>
+        <td th:text="${machine.getProducer()}"/>
+        <td th:text="${machine.getDepart()}"/>
+        <td th:text="${machine.getmTDescription()}"/>
+        <td th:text="${machine.getLength()}"/>
+        <td th:text="${machine.getWidth()}"/>
+        <td th:text="${machine.getHeight()}"/>
+        <td th:text="${machine.getMass()}"/>
+        <td th:text="${machine.getPower()}"/>
+        <td th:text="${machine.getnMin()}"/>
+        <td th:text="${machine.getnMax()}"/>
+        <td th:text="${machine.getToolSocket()}"/>
+        <td th:text="${machine.getWorkSocket()}"/>
+        <td th:text="${machine.getCz()}"/>
+        <td th:text="${machine.getKw()}"/>
+        <td th:text="${machine.getKp()}"/>
+        </tbody>
+    </table>
+</div>
+
+<hr>
+
+</body>
+</html>

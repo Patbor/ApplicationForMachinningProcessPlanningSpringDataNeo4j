@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Detail</title>
+</head>
+<body>
+<div class="container">
+    <h3>Part</h3>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>IDPart</th>
+            <th>PartName</th>
+            <th>IDMat</th>
+            <th>Mass</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${part.getIdPart()}"/>
+            <td th:text="${part.getPartName()}"/>
+            <td th:text="${part.getIdMat()}"/>
+            <td th:text="${part.getMass()}"/>
+        </tr>
+        </tbody>
+    </table>
+    <hr>
+</div>
+<div class="container">
+    <h3>A part is made of</h3>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>IDBL</th>
+            <th>IDP</th>
+            <th>Material</th>
+            <th>DMax</th>
+            <th>Dpf</th>
+            <th>TDpf</th>
+            <th>ITpf</th>
+            <th>Rapf</th>
+            <th>Lpf</th>
+            <th>TLpf</th>
+            <th>Np</th>
+            <th>Weight</th>
+            <th>Price</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${blank.getIdbl()}"/>
+            <td th:text="${blank.getIdp()}"/>
+            <td th:text="${blank.getMaterial()}"/>
+            <td th:text="${blank.getDmax()}"/>
+            <td th:text="${blank.getDpf()}"/>
+            <td th:text="${blank.getTdpf()}"/>
+            <td th:text="${blank.getItpf()}"/>
+            <td th:text="${blank.getRapf()}"/>
+            <td th:text="${blank.getLpf()}"/>
+            <td th:text="${blank.getTlpf()}"/>
+            <td th:text="${blank.getNp()}"/>
+            <td th:text="${blank.getWeight()}"/>
+            <td th:text="${blank.getPrice}"/>
+            <td>
+                <a th:href="@{/blank/updateForm(blankId =${blank.getId()})}"
+                   class="btn btn-info btn-sm">
+                    Update
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/blank/formBlank}"
+       class="btn btn-primary btn-sm mb-3">
+        Add blank
+    </a>
+    <hr>
+</div>
+<div class="container">
+    <h3>Create by Process</h3>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>IDPRJ</th>
+            <th>IDPart</th>
+            <th>IDBlank</th>
+            <th>DevelopedBy</th>
+            <th>CheckedBy</th>
+            <th>ApprovedBy</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${process.getIdprj()}"/>
+            <td th:text="${process.getIdPart()}"/>
+            <td th:text="${process.getIdBlank()}"/>
+            <td th:text="${process.getDevelopedBy()}"/>
+            <td th:text="${process.getCheckedBy()}"/>
+            <td th:text="${process.getApprovedBy()}"/>
+            <td>
+                <a th:href="@{/process/updateForm(processId =${process.getId()})}"
+                   class="btn btn-info btn-sm">
+                    Update
+                </a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/process/formProcess}"
+       class="btn btn-primary btn-sm mb-3">
+        Add process
+    </a>
+    <hr>
+</div>
+
+
+<div class="container">
+<h3>Consists of operations</h3>
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+    <tr>
+        <th>IDOP</th>
+        <th>IDPRJ</th>
+        <th>OPNo</th>
+        <th>OPType</th>
+        <th>Department</th>
+        <th>Workstation</th>
+        <th>Description</th>
+        <th>Tpz</th>
+        <th>Tj</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="tempOpe : ${operations}">
+        <td th:text="${tempOpe.getIdop()}"/>
+        <td th:text="${tempOpe.getIdprj()}"/>
+        <td th:text="${tempOpe.getOpno()}"/>
+        <td th:text="${tempOpe.getOpType()}"/>
+        <td th:text="${tempOpe.getDepartment()}"/>
+        <td th:text="${tempOpe.getWorkstation()}"/>
+        <td th:text="${tempOpe.getDescription()}"/>
+        <td th:text="${tempOpe.getTpz()}"/>
+        <td th:text="${tempOpe.getTj()}"/>
+        <td>
+            <a th:href="@{/operation/updateForm(operationId =${tempOpe.getId()})}"
+               class="btn btn-info btn-sm">
+                Update
+            </a>
+            <a th:href="@{/operation/delete(operationId =${tempOpe.getId()})}"
+               class="btn btn-danger btn-sm"
+               onclick="if(!(confirm('Are you sure you want to delete this operation?'))) return false">
+                Delete
+            </a>
+        </td>
+    </tbody>
+</table>
+    <form action="#" th:action="@{/view/detail/operation}"
+          th:object="${id}" method="get">
+        <select class="form-control mb-2 col-2" th:field="*{id}">
+            <option th:each="operation : ${operations}"
+                    th:value="${operation.getIdop()}"
+                    th:text="${operation.getIdop()}"/>
+        </select>
+        <button type="submit">Operation detail</button>
+    </form>
+    <hr>
+    <a th:href="@{/operation/formOperation}"
+       class="btn btn-primary btn-sm mb-3">
+        Add operation
+    </a>
+    <hr>
+</div>
+
+
+
+<div class="container">
+    <h3>Available features</h3>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>IDFtr</th>
+            <th>IDPart</th>
+            <th>FtrNo</th>
+            <th>Ftrtype</th>
+            <th>Diameter</th>
+            <th>Length</th>
+            <th>Depth</th>
+            <th>Width</th>
+            <th>Radius</th>
+            <th>Angle</th>
+            <th>Fit</th>
+            <th>IT</th>
+            <th>Ra</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="fet : ${features}">
+           <td th:text="${fet.getIdftr()}"/>
+           <td th:text="${fet.getIdPart()}"/>
+           <td th:text="${fet.getFtrno()}"/>
+           <td th:text="${fet.getFtrtype()}"/>
+           <td th:text="${fet.getDiameter}"/>
+           <td th:text="${fet.getLength()}"/>
+           <td th:text="${fet.getDepth()}"/>
+           <td th:text="${fet.getWidth()}"/>
+           <td th:text="${fet.getRadius()}"/>
+           <td th:text="${fet.getAngle()}"/>
+           <td th:text="${fet.getFit()}"/>
+           <td th:text="${fet.getIt()}"/>
+           <td th:text="${fet.getRa()}"/>
+
+            <td>
+                <a th:href="@{/feature/updateForm(featureId =${fet.getId()})}"
+                   class="btn btn-info btn-sm">
+                    Update
+                </a>
+                <a th:href="@{/feature/delete(featureId =${fet.getId()})}"
+                   class="btn btn-danger btn-sm"
+                   onclick="if(!(confirm('Are you sure you want to delete this feature?'))) return false">
+                    Delete
+                </a>
+            </td>
+        </tbody>
+    </table>
+    <a th:href="@{/feature/formFeature}"
+       class="btn btn-primary btn-sm mb-3">
+        Add feature
+    </a>
+    <hr>
+</div>
+
+
+</body>
+</html>

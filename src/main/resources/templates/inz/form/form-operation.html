@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Save Part</title>
+</head>
+<body>
+
+<div class ="container">
+    <h3>Operation Directory</h3>
+    <hr>
+    <p class="h4 mb4">Save Operation</p>
+    <form action="#" th:action="@{/operation/save}"
+          th:object="${operation}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <label th:text="OPType"></label>
+        <input type="text" th:field="*{opType}"
+               class="form-control mb-2 col-2" placeholder="OPType">
+        <label th:text="Department"></label>
+        <input type="text" th:field="*{department}"
+               class="form-control mb-2 col-2" placeholder="Department">
+        <label th:text="Workstation"></label>
+        <select name="workstation" class="form-control mb-2 col-2" placeholder="Workstation" >
+            <option th:each="workstation : ${machines}"
+               th:text="${workstation.getPkidmt()}"/>
+        </select>
+        <label th:text="Description"></label>
+        <input type="text" th:field="*{description}"
+               class="form-control mb-2 col-2" placeholder="Description">
+        <label th:text="Tpz"></label>
+        <input type="text" th:field="*{tpz}"
+               class="form-control mb-2 col-2" placeholder="Tpz">
+        <label th:text="Tj"></label>
+        <input type="text" th:field="*{tj}"
+               class="form-control mb-2 col-2" placeholder="Tj">
+        <button type="submit" class="btn btn-info col-2">Save</button>
+    </form>
+    <hr>
+
+</div>
+</body>
+</html>

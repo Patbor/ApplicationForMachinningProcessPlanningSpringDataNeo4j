@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Setup</title>
+</head>
+<body>
+
+<div class="container">
+    <h3>Setup</h3>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>IDSET</th>
+            <th>IDOP</th>
+            <th>SETNo</th>
+            <th>SETType</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${setup.getIdset()}"/>
+            <td th:text="${setup.getIdop()}"/>
+            <td th:text="${setup.getSetNo()}"/>
+            <td th:text="${setup.getSetType()}"/>
+            <td th:text="${setup.getDescription()}"/>
+
+        </tr>
+        </tbody>
+    </table>
+    <hr>
+</div>
+<div class="container">
+    <h3>Type</h3>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>IDADPU</th>
+            <th>CodeDPU</th>
+            <th>ADPU1</th>
+            <th>ADPU2</th>
+            <th>ADPU3</th>
+            <th>ADPU4</th>
+            <th>ADPUDescription</th>
+            <th>Resource</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${adpu.getIdadpu()}"/>
+            <td th:text="${adpu.getCodeDPU()}"/>
+            <td th:text="${adpu.getAdpu1()}"/>
+            <td th:text="${adpu.getAdpu2()}"/>
+            <td th:text="${adpu.getAdpu3()}"/>
+            <td th:text="${adpu.getAdpu4()}"/>
+            <td th:text="${adpu.getAdpuDes()}"/>
+            <td th:text="${adpu.getResource()}"/>
+
+        </tr>
+        </tbody>
+    </table>
+    <hr>
+</div>
+
+<div class="container">
+    <h3>With equipment</h3>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <th>IDEQ</th>
+        <th>EQCode</th>
+        <th>EQName</th>
+        <th>Description</th>
+        </thead>
+        <tbody>
+        <tr th:each="equ : ${equipment}">
+            <td th:text="${equ.getIdeq()}"/>
+            <td th:text="${equ.getEqCode()}"/>
+            <td th:text="${equ.getEqName()}"/>
+            <td th:text="${equ.getDescription()}"/>
+            <td> <a th:href="@{/equipment/delete(ideq =${equ.getIdeq})}"
+                    class="btn btn-danger btn-sm"
+                    onclick="if(!(confirm('Are you sure you want to delete equipment from operation?'))) return false">
+                Delete
+            </a></td>
+        </tr>
+    </tbody>
+    </table>
+    <a th:href="@{/equipment/formEquipment}"
+       class="btn btn-primary btn-sm mb-3">
+        Choose Equipment
+    </a>
+    <hr>
+</div>
+
+<div class="container">
+    <h3>Perform treatment</h3>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <th>IDMC</th>
+        <th>IDSET</th>
+        <th>MCNo</th>
+        <th>PathNo</th>
+        <th>TypeDT</th>
+        <th>Description</th>
+        <th>ToolID</th>
+        <th>IDPFt</th>
+        <th>Dp</th>
+        <th>Dk</th>
+        <th>L</th>
+        <th>ap</th>
+        <th>F</th>
+        <th>Vc</th>
+        <th>n</th>
+        <th>tg</th>
+        <th>Action</th>
+        </thead>
+        <tbody>
+        <tr th:each="mach : ${machCuts}">
+            <td th:text="${mach.getIdmc()}"/>
+            <td th:text="${mach.getIdset()}"/>
+            <td th:text="${mach.getMcno()}"/>
+            <td th:text="${mach.getPathNo()}"/>
+            <td th:text="${mach.getTypeDT()}"/>
+            <td th:text="${mach.getDescription()}"/>
+            <td th:text="${mach.getToolID()}"/>
+            <td th:text="${mach.getIdpft()}"/>
+            <td th:text="${mach.getDp()}"/>
+            <td th:text="${mach.getDk()}"/>
+            <td th:text="${mach.getL()}"/>
+           <td th:text="${mach.getAp()}"/>
+           <td th:text="${mach.getF()}"/>
+           <td th:text="${mach.getVc()}"/>
+           <td th:text="${mach.getN()}"/>
+           <td th:text="${mach.getTg()}"/>
+            <td>
+                <a th:href="@{/treatment/updateForm(treatmentId =${mach.getId()})}"
+                   class="btn btn-info btn-sm">
+                    Update
+                </a>
+                <a th:href="@{/treatment/delete(treatmentId =${mach.getId})}"
+                   class="btn btn-danger btn-sm"
+                   onclick="if(!(confirm('Are you sure you want to delete a treatment?'))) return false">
+                    Delete
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <hr>
+    <a th:href="@{/treatment/formTreatment}"
+       class="btn btn-primary btn-sm mb-3">
+        Add treatment
+    </a>
+    <form action="#" th:action="@{/view/detail/operation/setup/treatment}"
+          th:object="${id}" method="get">
+        <select class="form-control mb-2 col-2" th:field="*{id}">
+            <option th:each="mach : ${machCuts}"
+                    th:value="${mach.getIdmc()}"
+                    th:text="${mach.getIdmc()}"/>
+        </select>
+        <button type="submit">Treatment Details</button>
+    </form>
+</div>
+<hr>
+
+</body>
+</html>
